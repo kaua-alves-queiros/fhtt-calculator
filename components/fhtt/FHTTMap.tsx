@@ -270,8 +270,11 @@ const FHTTMapContent = () => {
     const sourceNode = useMemo(() => nodes.find(n => n.id === pendingConnection?.source) || null, [nodes, pendingConnection]);
     const targetNode = useMemo(() => nodes.find(n => n.id === pendingConnection?.target) || null, [nodes, pendingConnection]);
 
+    const [projectName, setProjectName] = useState('fhtt-network');
+
     const onExport = () => {
         const data = {
+            projectName,
             nodes,
             edges,
         };
@@ -280,7 +283,7 @@ const FHTTMapContent = () => {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'fhtt-network.json';
+        link.download = `${projectName || 'fhtt-network'}.json`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -305,6 +308,9 @@ const FHTTMapContent = () => {
                 if (data.nodes && data.edges) {
                     setNodes(data.nodes);
                     setEdges(data.edges);
+                    if (data.projectName) {
+                        setProjectName(data.projectName);
+                    }
                     setCalcTrigger(c => c + 1);
                     alert('Network loaded successfully!');
                 } else {
@@ -368,6 +374,17 @@ const FHTTMapContent = () => {
                             <Link size={16} />
                             Link Mode {isLinkMode && linkSourceId && "(Select Target)"}
                         </button>
+                        <div className="w-px bg-gray-300 mx-1" />
+                        <div className="flex items-center gap-2 px-2">
+                            <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">Project:</span>
+                            <input
+                                type="text"
+                                value={projectName}
+                                onChange={(e) => setProjectName(e.target.value)}
+                                className="border border-gray-300 rounded px-2 py-1 text-sm text-gray-900 w-40 focus:outline-none focus:border-blue-500"
+                                placeholder="Project Name"
+                            />
+                        </div>
                         <div className="w-px bg-gray-300 mx-1" />
                         <button
                             className="px-3 py-1 rounded flex items-center gap-2 hover:bg-gray-100 text-gray-700"
