@@ -1,5 +1,6 @@
 import React from 'react';
 import { FHTTNodeType } from '@/lib/fhtt/types';
+import { Router, Split, Activity, CircleDot } from 'lucide-react';
 
 export const Sidebar = () => {
     const onDragStart = (event: React.DragEvent, nodeType: FHTTNodeType, label: string, data?: any) => {
@@ -22,9 +23,9 @@ export const Sidebar = () => {
     ];
 
     const unbalancedSplitters = [
-        { ratio: '1/99', loss1: 20.0, loss2: 0.1 }, // Approx
+        { ratio: '1/99', loss1: 20.0, loss2: 0.1 },
         { ratio: '2/98', loss1: 17.0, loss2: 0.2 },
-        { ratio: '5/95', loss1: 13.5, loss2: 0.5 }, // Standard-ish
+        { ratio: '5/95', loss1: 13.5, loss2: 0.5 },
         { ratio: '10/90', loss1: 10.5, loss2: 0.6 },
         { ratio: '15/85', loss1: 8.5, loss2: 0.9 },
         { ratio: '20/80', loss1: 7.3, loss2: 1.2 },
@@ -44,12 +45,12 @@ export const Sidebar = () => {
             <div className="space-y-3">
                 <h3 className="font-semibold text-gray-700 text-sm uppercase tracking-wider">Source</h3>
                 <div
-                    className="p-3 border border-green-500 bg-green-50 rounded cursor-move hover:shadow-md transition-shadow"
-                    onDragStart={(event) => onDragStart(event, 'OLT', 'OLT', { power: 3 })}
+                    className="bg-green-50 p-2 border border-green-200 rounded cursor-grab mb-2 flex items-center gap-2"
+                    onDragStart={(event) => onDragStart(event, 'OLT', 'PON', { power: 3 })}
                     draggable
                 >
-                    <div className="font-bold text-green-900">OLT</div>
-                    <div className="text-xs text-gray-600">Source (+3 dBm)</div>
+                    <Router size={16} className="text-green-600" />
+                    <span className="text-sm font-medium text-gray-900">PON</span>
                 </div>
             </div>
 

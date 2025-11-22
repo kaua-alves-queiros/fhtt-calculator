@@ -3,9 +3,11 @@ export type FHTTNodeType = 'OLT' | 'SPLITTER_BALANCED' | 'SPLITTER_UNBALANCED' |
 
 export interface FHTTNodeData extends Record<string, unknown> {
   label: string;
+  description?: string; // User description
   type: FHTTNodeType;
   // OLT
   power?: number; // dBm
+  ports?: number; // Number of ports for OLT
 
   // Splitter
   ratio?: string; // e.g., "1:2", "5:95"

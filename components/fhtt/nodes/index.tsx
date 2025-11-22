@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
 import { FHTTNodeData } from '@/lib/fhtt/types';
 import { clsx } from 'clsx';
-import { Router, Split, Zap, CircleDot, Activity } from 'lucide-react';
+import { Router, Split, CircleDot, Activity } from 'lucide-react';
 
 const NodeWrapper = ({ children, selected, className }: { children: React.ReactNode, selected?: boolean, className?: string }) => (
     <div className={clsx(
@@ -19,8 +19,13 @@ export const OLTNode = memo(({ data, selected }: NodeProps<FHTTNodeData>) => {
         <NodeWrapper selected={selected} className="border-green-500 bg-green-50">
             <div className="flex items-center gap-2 mb-2 border-b border-green-200 pb-1">
                 <Router size={16} className="text-green-700" />
-                <div className="font-bold text-sm text-green-900">{data.label}</div>
+                <div className="font-bold text-sm text-green-900">PON</div>
             </div>
+            {data.description && (
+                <div className="text-[10px] text-gray-500 mb-1 italic max-w-[150px] truncate">
+                    {data.description}
+                </div>
+            )}
             <div className="text-xs text-gray-600">
                 Power: <strong>{data.power} dBm</strong>
             </div>
@@ -43,6 +48,11 @@ export const SplitterNode = memo(({ data, selected }: NodeProps<FHTTNodeData>) =
                 <Split size={16} className={isBalanced ? "text-blue-600" : "text-orange-600"} />
                 <div className="font-bold text-sm">{data.label}</div>
             </div>
+            {data.description && (
+                <div className="text-[10px] text-gray-500 mb-1 italic max-w-[150px] truncate">
+                    {data.description}
+                </div>
+            )}
 
             <div className="text-xs space-y-1">
                 <div className="flex justify-between">
@@ -54,12 +64,6 @@ export const SplitterNode = memo(({ data, selected }: NodeProps<FHTTNodeData>) =
                 <div className="text-gray-500">Ratio: {data.ratio}</div>
             </div>
 
-            {/* We use a single source handle for visual simplicity, 
-          but logically we might have multiple. 
-          For the "Click to Connect" flow, we don't strictly need multiple visual handles 
-          if the dialog handles the logic. 
-          But for standard React Flow, we might want them. 
-          Let's stick to one visual handle for now, and the edge label can show the port. */}
             <Handle type="source" position={Position.Right} id="out" className="w-3 h-3 bg-gray-500" />
         </NodeWrapper>
     );
@@ -79,6 +83,11 @@ export const ONUNode = memo(({ data, selected }: NodeProps<FHTTNodeData>) => {
                 <CircleDot size={16} className="text-purple-700" />
                 <div className="font-bold text-sm text-purple-900">{data.label}</div>
             </div>
+            {data.description && (
+                <div className="text-[10px] text-gray-500 mb-1 italic max-w-[150px] truncate">
+                    {data.description}
+                </div>
+            )}
             <div className="text-xs flex justify-between items-center">
                 <span>Rx:</span>
                 <span className={clsx("font-bold font-mono", isLow ? "text-red-600" : "text-green-600")}>
@@ -101,6 +110,11 @@ export const AttenuatorNode = memo(({ data, selected }: NodeProps<FHTTNodeData>)
                 <Activity size={14} className="text-gray-600" />
                 <div className="font-bold text-xs">{data.label}</div>
             </div>
+            {data.description && (
+                <div className="text-[8px] text-gray-500 mb-1 italic max-w-[100px] truncate">
+                    {data.description}
+                </div>
+            )}
             <div className="text-xs text-gray-500">Loss: {data.attenuation} dB</div>
             <div className="text-xs text-gray-500">In: {inputSignal} dBm</div>
             <Handle type="source" position={Position.Right} id="out" className="w-2 h-2 bg-gray-600" />

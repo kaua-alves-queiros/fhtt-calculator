@@ -26,7 +26,7 @@ export const ContextMenu = ({ x, y, onDelete, onClose }: ContextMenuProps) => {
         <div
             ref={ref}
             style={{ top: y, left: x }}
-            className="absolute z-50 bg-white border border-gray-200 shadow-lg rounded-md py-1 min-w-[120px]"
+            className="fixed z-50 bg-white border border-gray-200 shadow-lg rounded-md py-1 min-w-[120px]"
         >
             <button
                 onClick={onDelete}
