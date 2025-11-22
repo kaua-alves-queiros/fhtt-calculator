@@ -148,10 +148,18 @@ const FHTTMapContent = () => {
     const onEdgeEditConfirm = (edgeId: string, updates: Partial<FHTTEdgeData>) => {
         setEdges((eds) => eds.map((e) => {
             if (e.id === edgeId) {
+                const currentData = e.data || { length: 0, lossPerKm: 0.35 };
+                const newData: FHTTEdgeData = {
+                    ...currentData,
+                    ...updates,
+                    length: updates.length ?? currentData.length,
+                    lossPerKm: updates.lossPerKm ?? currentData.lossPerKm
+                };
+
                 return {
                     ...e,
-                    data: { ...e.data, ...updates },
-                    label: updates.length !== undefined ? `${updates.length}m` : e.label
+                    data: newData,
+                    label: `${newData.length}m`
                 };
             }
             return e;

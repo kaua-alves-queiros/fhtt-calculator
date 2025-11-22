@@ -14,7 +14,9 @@ const NodeWrapper = ({ children, selected, className }: { children: React.ReactN
     </div>
 );
 
-export const OLTNode = memo(({ data, selected }: NodeProps<FHTTNodeData>) => {
+type FHTTNodeProps = NodeProps & { data: FHTTNodeData };
+
+export const OLTNode = memo(({ data, selected }: FHTTNodeProps) => {
     return (
         <NodeWrapper selected={selected} className="border-green-500 bg-green-50">
             <div className="flex items-center gap-2 mb-2 border-b border-green-200 pb-1">
@@ -34,7 +36,7 @@ export const OLTNode = memo(({ data, selected }: NodeProps<FHTTNodeData>) => {
     );
 });
 
-export const SplitterNode = memo(({ data, selected }: NodeProps<FHTTNodeData>) => {
+export const SplitterNode = memo(({ data, selected }: FHTTNodeProps) => {
     const isBalanced = data.type === 'SPLITTER_BALANCED';
     const inputSignal = data.inputSignal !== undefined && data.inputSignal !== null
         ? data.inputSignal.toFixed(2)
@@ -69,7 +71,7 @@ export const SplitterNode = memo(({ data, selected }: NodeProps<FHTTNodeData>) =
     );
 });
 
-export const ONUNode = memo(({ data, selected }: NodeProps<FHTTNodeData>) => {
+export const ONUNode = memo(({ data, selected }: FHTTNodeProps) => {
     const inputSignal = data.inputSignal !== undefined && data.inputSignal !== null
         ? data.inputSignal.toFixed(2)
         : '--';
@@ -98,7 +100,7 @@ export const ONUNode = memo(({ data, selected }: NodeProps<FHTTNodeData>) => {
     );
 });
 
-export const AttenuatorNode = memo(({ data, selected }: NodeProps<FHTTNodeData>) => {
+export const AttenuatorNode = memo(({ data, selected }: FHTTNodeProps) => {
     const inputSignal = data.inputSignal !== undefined && data.inputSignal !== null
         ? data.inputSignal.toFixed(2)
         : '--';
