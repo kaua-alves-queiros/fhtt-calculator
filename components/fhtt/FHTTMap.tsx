@@ -39,8 +39,7 @@ const nodeTypes: any = {
     ONU: ONUNode,
 };
 
-let id = 0;
-const getId = () => `dndnode_${id++}`;
+const getId = () => `dndnode_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
 const FHTTMapContent = () => {
     const reactFlowWrapper = useRef<HTMLDivElement>(null);
