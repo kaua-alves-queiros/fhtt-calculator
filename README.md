@@ -12,7 +12,9 @@
 
 ## 📸 Preview
 
-![App Preview](https://github.com/kaua-alves-queiros/fhtt-calculator/blob/main/public/preview.png?raw=true)
+<div align="center">
+  <img src="screenshots/1.png" alt="Dark Mode" width="45%" />
+</div>
 
 ## 📖 About the Project
 
